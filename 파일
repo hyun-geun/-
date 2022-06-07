@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>C++</title>
+	<style>
+		@keyframes change_header {
+			0% {background-color: white;}
+			100% {background-color: royalblue;}
+		}
+		@keyframes change_h1{
+			0% {color: black;}
+			100% {color: white;}
+		}
+		
+		html,body{
+			height: 100%;
+		}
+		.header{
+			animation-name: change_header;
+			animation-duration: 2s;
+			animation-iteration-count: 1;
+			width: 100%;
+			height: 5%;
+		}
+		.nav{
+			width: 10%;
+			height: 220%;
+			float: left;
+			background: aliceblue;
+		}
+		.section{
+			width: 90%;
+			height: 95%;
+			margin-left: 12%;
+		}
+		
+		h1{
+			animation-name: change_h1;
+			animation-duration: 2s;
+			animation-iteration-count: 1;
+			color: white;
+		}
+
+		h3{
+			color: skyblue;
+		}
+
+		ul{
+			list-style-type: circle;
+		}
+		ul li{
+			margin-right: 10em;
+		}
+		section ul li{
+			margin-bottom: 1em;
+		}
+		strong, h4{
+			color: royalblue;
+		}
+		
+		div{
+			margin-right: 10em;
+		}
+		#fix{
+			position: fixed;
+		}
+		#clock{
+			display: block;
+			width: 7em;
+			border: 1px solid gray;
+			background-color: aliceblue;
+		}
+	</style>
+
+	<script>
+		function startClock(){
+			var clock=document.getElementById("clock");
+			timeout(clock);
+		}
+
+		function timeout(obj){
+			var current=new Date();
+			obj.innerHTML=current.toLocaleTimeString();
+			setTimeout("timeout(clock)",1000);
+		}
+
+		function color(){
+			var sec=document.getElementsByClassName("section");
+			var sec_color=document.getElementById("section_color");
+			document.body.style.background=sec_color.value;
+		}
+
+		var canvas;
+		var context;
+
+		function init(){
+			canvas=document.getElementById("canvas");
+			context=canvas.getContext("2d");
+			draw();
+		}
+
+		function draw(){
+			var language= new Array("python","C","Java","C++","C#","Visual Basic","나머지");
+			var percentage=new Array(12.74,11.59,10.99,8.83,6.39,5.86,43.6);
+			var color=new Array("red","blue","green","yellow","black","purple","white")
+			context.clearRect(0,0,canvas.width,canvas.height);
+			var x=canvas.width/2+60;
+			var y=canvas.height/2;
+			var small=(x<y)?x:y;
+			var radius=small-30;
+			var startAngle=0;
+			var endAngle=0;
+			for(var i=0;i<percentage.length;i++){
+
+				var rad=2*Math.PI*percentage[i]/100;
+				endAngle= startAngle+rad;
+				context.beginPath();
+				context.moveTo(x,y);
+				context.arc(x,y,radius,startAngle,endAngle);
+				context.closePath();
+
+				context.strokeStyle=color[i];
+				context.fillStyle=color[i];
+				context.fill();
+				context.stroke();
+				startAngle=endAngle;
+		}
+		for(var i=0;i<percentage.length;i++){
+			context.font="normal 8px gothic";
+				context.fillStyle="blue";
+					context.fillText(language[i]+" 언어는 "+percentage[i]+ "% : "+color[i],10,30+i*10);
+				}
+	}
+	</script>
+</head>
+
+<body onload="startClock()">
+	<header class="header" style="background-color:royalblue;">
+		<h1>프로그래밍 기술 중 하나인 C++을 소개합니다.</h1>
+	</header>
+
+	<nav class="nav">
+		<div id="fix">
+	<details>
+		<summary>목차</summary>
+		<ul>
+			<li><a href="#개요">개요</a></li>
+			<li><a href="#역사">역사</a></li>
+			<li><a href="#특징">특징</a></li>
+			<li><a href="#활용 분야">활용 분야</a></li>
+		</ul>
+	</details>
+	
+	<div id="clock">
+	</div>
+	<form>
+	웹 페이지 색 변경하기<br>
+	<input type="color" id="section_color" value="#FFFFFF">
+	<input type="button" onclick="color()" value="변경">
+</form>
+</div>
+	</nav>
+
+	<section class="section">
+	<h3 id="개요">개요</h3>
+	
+	<table>
+		<tr>
+			<td><img src="C:/Users/gusrm/Pictures/C++.png" width="150" height="150"></td>
+			<td>
+				<div>
+		<strong>C++</strong>는 전 세계에서 가장 널리 사용되는 프로그래밍 언어 중 하나로, C++는 기존의 C언어를 바탕으로 여러 기능을 추가하여 만들어 C언어 기존의 표준 라이브러리를 그대로 사용할 수 있는 프로그래밍 언어입니다.  
+	</div></td>
+		</tr>
+		<tr>
+			<td>
+				<a href="https://www.tiobe.com/tiobe-index/"><canvas style="background-color: aliceblue" onmouseover ="init()" id="canvas" width="300" height="150"></canvas></a>
+			</td>
+			<td>
+				옆에 있는 그래프는 자주 사용하는 프로그래밍 언어의 사용 비율을 보여주는 그래프입니다.<br> C++는 4위를 할 정도로 많은 사람들이 사용하는 인기 프로그래밍 언어임을 알 수 있습니다.<br>(마우스를 가져다 대면 그래프가 보이고, 클릭하면 자료의 출처 사이트로 이동합니다.)
+			</td>
+		</tr>
+	</table>
+
+	<h3 id="역사">역사</h3>
+	<div>
+		C++는 <strong>비야네 스트롭스트룹(Bjarne Stroustrup)</strong>에 의해 개발됩니다. 1979년에 비야네 스트롭스트룹은 C언어에서 직접적으로 파생된 <strong>"C with Classes"</strong>라는 이름의 언어로 개발 작업을 착수했습니다. 1983년, "C with Classes"라는 이름은 가상 함수, 함수 이름, 연산자 오버로딩, 참조 등 새로운 기능들을 추가하면서 <strong>"C++"</strong>로 변경되었습니다.
+	</div>
+
+	<h3 id="특징">특징</h3>
+		<h4>C++의 설계 목표</h4>
+		<hr>
+		<ul>
+			<li><strong>C언어와의 호환성</strong> : 기존에 작성된 C 프로그램을 그대로 사용할 수 있도록 C 언어의 문법적 체계를 그대로 계승합니다. 또한, C 언어로 작성되어 컴파일된 목적 파일(object file)이나 라이브러리를 C++ 프로그램에서 링크하여 사용할 수 있도록 합니다.</li>
+			<li><strong>객체 지향</strong> : 소프트웨어의 재사용을 통해 소프트웨어 생산성을 높이고, 복잡하고 큰 규모의 소프트웨어 작성, 관리, 유지 보수를 쉽게 하기 위해서 객체 지향적 개념을 도입합니다.</li>
+			<li><strong>타입 체크</strong> : 타입 체크를 엄격히 하여 실행 시간 오류의 가능성을 줄이고 디버깅을 돕습니다.</li>
+			<li><strong>효율성 저하 최소화</strong> : 객체 지향 개념의 체 지향 개념의 도입으로 멤버 함수의 호출이 잦아지고 이로 인해 발생하는 실행 시간 저하의 비효율성을 막기 위해 인라인 함수의 도입 등 합수 호출로 인한 시간 저하를 막습니다</li>
+		</ul>  
+		<h4>C++의 객체 지향 특성</h4>
+		<hr>
+		C++는 객체 지향 개념을 도입하여, 이미 만들어진 C++ 클래스를 상속받거나, 재사용하거나,<br>부분 수정을 통해 소프트웨어의 생산성을 높였습니다. 또한 물체들의 상호 작용으로 모델링을 하여 실세계에 적합한 프로그래밍을 할 수 있도록 하였습니다.
+		<h5>객체(Instance)와 캡슐화(EnCapsulation)</h5>
+		<hr>
+		<div><strong>캡슐화</strong>는 데이터를 캡슐로 싸서 외부의 접근으로부터 데이터를
+				보호하는 객체 지향 특성입니다. C++에서 <strong>클래스</strong>는 캡슐의 역할을 하며 class 키워드를 통해 작성합니다. 객체는 클래스라는 틀에서 생겨난
+				실체(instance)입니다. C++ 클래스는 메버 변수들과 멤버 함수들로 이루어지며,
+				멤버들은 캡슐 외부에 공개하거나(public), 보이지 않게(private) 선언할 수 있습니다.
+			</div>
+		<h5>상속성(Inheritance)</h5>
+		<hr>
+		<div>자식 클래스가 부모 클래스의 속성을 물려받는 것을 <strong>상속</strong>이라 합니다. 객체를 정의하는 클래스 사이에 상속 관계를 두면, 자식 클래스의 객체가 생성될 때 자식 클래스에 선언된 멤버 뿐만 아니라 부모 크래스에 선언된 멤버들도 함께 가지고 생성됩니다.</div>
+		<h5>다형성(Polymorphism)</h5>
+		<hr>
+		<div>
+			<strong>다형성</strong>이란 어떠한 기능이 경우에 따라 서로 다르게 동작하는 현상입니다.
+			<ul>
+				<li>
+					연산자 중복(Operator Overloading) : 같은 연산자라도 피연산자에 따라 서로 다른 연산이 이루어집니다.
+					<ul>
+						<li> 2 + 3 = 5
+						<li> "여자" + "남자" = "여자남자"
+					</ul>
+				<li>함수 중복(Function Overriding) : 부모 클래스에서 구현된 어떠한 함수를 자식 클래스에서 서로 다르게 구현합니다.
+			</ul>
+		</div>
+		<h4>C++의 장점</h4>
+		<hr>
+		<div>
+		<ul>
+			<li>
+			<strong>효율성이 높아 간결하고 대규모의 고기능 프로그램을 만들 수 있습니다.</strong>
+			</li>
+			<li>
+				<strong>하드웨어를 직접 제어하는 저수준/ 고수준의 프로그래밍이 가능합니다.</strong> 다른 언어들에 비해 어셈블리어와 같은 저수준(low-level) 언어에 가깝습니다.고급언어 이지만 메모리 관리와 같은 하드웨어 제어도 가능합니다.
+			</li>
+			<li>
+				<strong>이식성이 좋습니다.</strong> 대부분의 컴퓨터에는 종류에 관계없이 C언어의 컴파일러, 인터프리터가 내장되어 있습니다.
+			</li>
+			<li>
+				<strong>모든 분야에 두루 활용할 수 있을 정도로 범용적입니다.</strong> 사무 처리, 과학 기술, 상업용 등 거의 대부분의 응용 프로그램을 개발할 수 있습니다.
+			</li>
+		</ul>
+	</div>
+
+	<h3 id="활용 분야">활용 분야</h3>
+		<ul>
+			<li><strong>데이터베이스</strong> : C++는 데이터베이스에서 많이 사용됩니다. C++의 문법이 현대의 데이터베이스와 아주 맞기 때문입니다. C++로 작성된 대부분의 데이터베이스는 YouTube, WordPress, Twitter, Facebook 등과 같이 거의 모두가 실생활에서 사용하는 애플리케이션에서 사용됩니다.</li>
+			<li><strong>운영체제</strong> : Windows, Linux, Android, Ubuntu, iOS 등과 같은 모든 주요 운영 체제는 C와 C++의 조합으로 작성됩니다. Windows 애플리케이션은 C++로 작성되는 반면 Android 애플리케이션은 C/C++와 함께 Java로 작성됩니다. 또한 C++를 사용하여 iOS에서 애플리케이션의 핵심을 개발할 수 있습니다.
+</li>
+			<li><strong>웹 브라우저</strong> : 많은 웹 브라우저가 크롬, 파이어폭스, 사파리 등과 같은 C++를 사용하여 개발됩니다. Chrome은 렌더링 엔진, JavaScript 엔진 및 UI에 C++를 포함합니다. Firefox는 렌더링 엔진에서 주로 사용하고, UI에서 약간 사용합니다. Safari는 렌더링 엔진과 JavaScript 엔진에서도 C++를 사용하기도 합니다.
+</li>
+			<li><strong>그래픽</strong> : 디지털 영상 처리, 컴퓨터 비전, 화면 녹화 프로그램 등과 같은 그래픽이 필요한 응용 프로그램에서 빠른 속도를 위해 C++를 사용합니다.</li>
+			<li><strong>임베디드 시스템</strong> : C++는 하드웨어 레벨에 더 가깝기 때문에 내장형 시스템에서 소프트웨어와 하드웨어가 밀접하게 결합되어 매우 유용합니다. 스마트워치, MP3 플레이어, GPS 등 C++를 사용하는 임베디드 시스템의 수가 적지 않습니다.</li>
+			<li><strong>게임 개발</strong> : 게임을 개발할 때 사용할 수 있는 프로그래밍 언어는 다양하지만, 객체 지향 프로그래밍 언어(OOP)인 C++를 사용함으로써 프로그래밍 게임을 빠르고 쉽게 만들고, 하드웨어와 그래픽 프로세스를 보다 직접 제어할 수 있게합니다. 또한 C++는 게임 프로그래밍에서 파라미터와 메모리 관리를 효과적으로 제어할 수 있고, 최적화가 잘 된다는 장점도 가지고 있습니다.</li>
+		</ul>
+</section>
+</body>
+</html>
